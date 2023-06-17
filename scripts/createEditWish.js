@@ -216,18 +216,22 @@ export const createEditWish = async (id) => {
     type: 'submit',
   })
 
-  const btnDeleteWish = createElement('button', {
-    className: 'edit__submit-btn btn',
-    textContent: 'Удалить желание',
-    type: 'button',
-  })
+  editSubmitWrapper.append(btnSaveWish)
 
-  btnDeleteWish.addEventListener('click', async () => {
-    await deleteWish(id)
-    history.back()
-  })
+  if (wishData) {
+    const btnDeleteWish = createElement('button', {
+      className: 'edit__submit-btn btn',
+      textContent: 'Удалить желание',
+      type: 'button',
+    })
 
-  editSubmitWrapper.append(btnSaveWish, btnDeleteWish)
+    btnDeleteWish.addEventListener('click', async () => {
+      await deleteWish(id)
+      history.back()
+    })
+
+    editSubmitWrapper.append(btnDeleteWish)
+  }
 
   formWish.append(editWish, editWishPhoto, editSubmitWrapper)
 
